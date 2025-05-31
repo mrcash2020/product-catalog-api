@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-catalog-api
+  namespace: product-catalog
+spec:
+  replicas: 2  # Running multiple replicas for high availability
+  selector:
+    matchLabels:
+      app: api
+  template:
+    metadata:
+      labels:
+        app: api
+    spec:
+      containers:
+      - name: api
+        image: profemzy/product-catalog-api:latest  # You'll need to build and push this image to a container registry
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: product-catalog-config
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-catalog-api
+  namespace: product-catalog
+spec:
+  selector:
+    app: api
+  ports:
+  - port: 80
+    targetPort: 3000
+  type: ClusterIP 
