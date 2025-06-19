@@ -28,6 +28,13 @@ pipeline {
             }
         }
 
+    stage('Test Docker') {
+      steps {
+        sh 'docker --version'  // checks if Docker command is accessible
+        sh 'docker info'       // optional: shows Docker info if accessible
+            }
+         }
+  
         stage('Docker Build') {
             steps {
                 echo 'building docker image...'
