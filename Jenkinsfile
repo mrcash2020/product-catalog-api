@@ -34,8 +34,9 @@ IMAGE_NAME =
                 echo 'pushing docker image...'
 
         withCredentials([usernamePassword(credentialsId: 'docker-hub-creds',
-        usernameVariable:"DOCKER_USER")
-        passwordVariable:"DOCKER_PASS")]) {
+        usernameVariable:'DOCKER_USER',
+        passwordVariable:'DOCKER_PASS'
+        )]) {
         sh """
         'echo DOCKER_PASS | docker login -uDOCKER_USER --password-stdin'
         'docker push $IMAGE_NAME'
