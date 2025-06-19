@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = 'product-catalog-api'
-         PATH = "/usr/local/bin:$PATH
+         PATH = "/usr/local/bin:{env.PATH}"
          }
     stages {
         stage('Build') {
