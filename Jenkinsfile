@@ -1,11 +1,5 @@
-pipeline {
-    agent any
-environment {
-IMAGE_NAME =
-'product-catalog-api'}
-}
-    stages {
-        stage('Build') } {
+pipeline
+        stage('Build')  {
             steps {
                 echo 'Building...'
                 sh 'npm install'
@@ -41,11 +35,10 @@ IMAGE_NAME =
         'echo DOCKER_PASS | docker login -uDOCKER_USER --password-stdin'
         'docker push $IMAGE_NAME'
            """
-         }
-     }
-  }
- }
+              }
+        }
+    }
+              }              
 
  
-    
-
+     
