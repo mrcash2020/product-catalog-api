@@ -2,15 +2,15 @@ pipeline {
     agent any
 environment {
 IMAGE_NAME =
-'product-catalog-api'
+'product-catalog-api'}
 }
     stages {
-        stage('Build') {
+        stage('Build') } {
             steps {
                 echo 'Building...'
                 sh 'npm install'
                 sh 'npm run build'
-
+            }
         }
         stage('Test') {
             steps {
@@ -28,7 +28,7 @@ IMAGE_NAME =
               steps { 
              echo 'building docker image...'
              sh 'docker build -t product-catalog-api .'
-  
+              }
            stage('Docker Push') {
             steps {
                 echo 'pushing docker image...'
