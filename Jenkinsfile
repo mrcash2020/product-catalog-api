@@ -15,14 +15,16 @@
             }
         }
 
-        stage('Test'): echo 'Testing...'
+        stage('Test') { echo 'Testing...'
                 sh 'npm test'
-            
+        }
+    }
 
-        stage('Deploy') 
+        stage('Deploy') {
             steps 
                 echo 'Deploying...'
-            
+        }
+ }
 
         stage('Test Docker') 
             steps 
