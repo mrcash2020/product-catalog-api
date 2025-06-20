@@ -26,16 +26,19 @@
         }
  }
 
-        stage('Test Docker') 
-            steps 
+        stage('Test Docker') {
+            steps {
                 sh 'docker –version'
                 sh 'docker info'
-        stage('Docker Build') 
-            steps 
+            }
+        }
+        stage('Docker Build') {
+            steps {
                 echo 'Building Docker image...'
                 sh 'docker build -tIMAGE_NAME .'
             }
         }
+        
 
         stage('Docker Push') {
             steps {
