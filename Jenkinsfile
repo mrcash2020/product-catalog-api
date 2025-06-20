@@ -1,63 +1,54 @@
-
-pipeline {
+ pipeline {
     agent any
 
     environment {
         IMAGE_NAME = 'product-catalog-api'
-         PATH = "/usr/local/bin:{env.PATH}"
-         }
+        PATH = "/usr/local/bin:${env.PATH}"
+    }
+
     stages {
         stage('Build') {
             steps {
                 echo 'Building...'
                 sh 'npm install'
-                sh 'npm run build'
+                sh 'npm run build' // ensure build script exists
             }
         }
 
-        stage('Test') {
-            steps {
-                echo 'Testing...'
+        stage('Test'): echo 'Testing...'
                 sh 'npm test'
-            }
-        }
+            
 
-        stage('Deploy') {
-            steps {
+        stage('Deploy') 
+            steps 
                 echo 'Deploying...'
-            }
-        }
+            
 
-    stage('Test Docker') {
-      steps {
-        sh 'docker --version'  // checks if Docker command is accessible
-        sh 'docker info'       // optional: shows Docker info if accessible
-            }
-         }
-  
-        stage('Docker Build') {
-            steps {
-                echo 'building docker image...'
-                sh 'docker build -t product-catalog-api .'
+        stage('Test Docker') 
+            steps 
+                sh 'docker –version'
+                sh 'docker info'
+        stage('Docker Build') 
+            steps 
+                echo 'Building Docker image...'
+                sh 'docker build -tIMAGE_NAME .'
             }
         }
 
         stage('Docker Push') {
             steps {
-                echo 'pushing docker image...'
+                echo 'Pushing Docker image...'
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', 
                 usernameVariable: 'DOCKER_USER',
-                    passwordVariable: 'DOCKER_PASS')]) {
-                        sh """
-                            echo DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                            docker push \$IMAGE_NAME
-                        """
+                passwordVariable: 'DOCKER_PASS')]) {
+                    sh """
+                        echo \DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                        docker push \$IMAGE_NAME
+                    """
                 }
             }
         }
     }
 }
-      
+            
 
- 
-     
