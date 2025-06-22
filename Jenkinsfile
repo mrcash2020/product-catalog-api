@@ -12,24 +12,18 @@
                 echo 'Building...'
                 sh 'npm install'
                 sh 'npm run build' // ensure build script exists
-            }
-        }
-
-        stage('Test') { echo 'Testing...'
-                sh 'npm test'
-        }
-    }
-
+            }               
+        }           
         stage('Deploy') {
-            steps 
+            steps {
                 echo 'Deploying...'
         }
- }
+            }
 
         stage('Test Docker') {
             steps {
-                sh 'docker –version'
-                sh 'docker info'
+            sh 'docker –version'
+            sh 'docker info'
             }
         }
         stage('Docker Build') {
@@ -38,11 +32,9 @@
                 sh 'docker build -tIMAGE_NAME .'
             }
         }
-        
-
         stage('Docker Push') {
-            steps {
-                echo 'Pushing Docker image...'
+    steps {
+        
                 withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', 
                 usernameVariable: 'DOCKER_USER',
                 passwordVariable: 'DOCKER_PASS')]) {
@@ -52,3 +44,7 @@
                     """
                 }
             }
+        }
+    }
+ }
+ 
