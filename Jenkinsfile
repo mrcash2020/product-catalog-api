@@ -35,7 +35,7 @@
         stage('Docker Push') {
     steps {
         
-                withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', 
+                withCredentials([usernamePassword(credentialsId: 'docker-pass', 
                 usernameVariable: 'DOCKER_USER',
                 passwordVariable: 'DOCKER_PASS')]) {
                     sh """
