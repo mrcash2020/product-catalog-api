@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: product-catalog-api 
 spec:
-  replicas: 3
+  replicas: 5
   selector:
     matchLabels:
       app: catalog-api 

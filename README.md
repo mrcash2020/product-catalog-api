@@ -91,12 +91,12 @@ npm run dev
 ### Create a category
 
 ```bash
-curl -X POST http://localhost:3000/api/categories \
+curl -X POST http:/:/localhost:3000/api/categories \
   -H "Content-Type: application/json" \
   -d '{"name": "Electronics", "description": "Electronic gadgets and devices"}'
 ```
 
-### Create a product
+#c## Create a product
 
 ```bash
 curl -X POST http://localhost:3000/api/products \
@@ -104,7 +104,7 @@ curl -X POST http://localhost:3000/api/products \
   -d '{
     "name": "Smartphone X",
     "description": "Latest smartphone with advanced features",
-    "price": 999.99,
+    "price": 999.99
     "category": "60d9f2a9b4c7c61a84f5e71e",
     "sku": "PHON-001",
     "quantity": 50,
