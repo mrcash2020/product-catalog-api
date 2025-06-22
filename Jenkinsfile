@@ -29,7 +29,7 @@
         stage('Docker Build') {
             steps {
                 echo 'Building Docker image...'
-                sh 'docker build -tIMAGE_NAME .'
+                sh 'docker build -tproduct-catalog-api .'
             }
         }
         stage('Docker Push') {
